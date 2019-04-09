@@ -20,6 +20,7 @@
 
 
 googleQuestion = (msg) ->
+  msg.send 'Let me check that for you...'
   # msg.send msg.match.input
   googleCseId = process.env.HUBOT_GOOGLE_CSE_ID
   if googleCseId
