@@ -27,6 +27,6 @@ heroku config:set HUBOT_FIVE_W_HEAR=true
 ## Sample Interaction
 
 ```
-user1>> hubot roll di
-hubot>> 6
+user1>> who is john snow
+hubot>> John Snow is a character from HBO's Game of Thrones.
 ```
