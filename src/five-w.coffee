@@ -20,7 +20,6 @@
 
 
 googleQuestion = (msg) ->
-  msg.send 'Let me check that for you...'
   # msg.send msg.match.input
   googleCseId = process.env.HUBOT_GOOGLE_CSE_ID
   if googleCseId
@@ -33,7 +32,7 @@ googleQuestion = (msg) ->
     q =
       q: msg.match.input,
       safe: process.env.HUBOT_GOOGLE_SAFE_SEARCH || 'high',
-      fields:'items(link)',
+      fields:'items(snippet,link)',
       cx: googleCseId,
       key: googleApiKey
     url = 'https://www.googleapis.com/customsearch/v1'
@@ -41,7 +40,8 @@ googleQuestion = (msg) ->
       .query(q)
       .get() (err, res, body) ->
         response = JSON.parse(body)
-        msg.send response
+        answer = msg.random response.items
+        msg.send answer.snippet + ' ' + answer.link
 
 module.exports = (robot) ->
   if !process.env.HUBOT_CHANCE_HEAR?
