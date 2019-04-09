@@ -20,7 +20,27 @@
 
 
 googleQuestion = (msg) ->
-  msg.send msg.match.input
+  # msg.send msg.match.input
+  googleCseId = process.env.HUBOT_GOOGLE_CSE_ID
+  if googleCseId
+    # Using Google Custom Search API
+    googleApiKey = process.env.HUBOT_GOOGLE_CSE_KEY
+    if !googleApiKey
+      msg.robot.logger.error "Missing environment variable HUBOT_GOOGLE_CSE_KEY"
+      msg.send "Missing server environment variable HUBOT_GOOGLE_CSE_KEY."
+      return
+    q =
+      q: msg.match.input,
+      safe: process.env.HUBOT_GOOGLE_SAFE_SEARCH || 'high',
+      fields:'items(link)',
+      cx: googleCseId,
+      key: googleApiKey
+    url = 'https://www.googleapis.com/customsearch/v1'
+    msg.http(url)
+      .query(q)
+      .get() (err, res, body) ->
+        response = JSON.parse(body)
+        msg.send response
 
 module.exports = (robot) ->
   if !process.env.HUBOT_CHANCE_HEAR?
