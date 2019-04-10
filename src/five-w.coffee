@@ -47,7 +47,7 @@ googleQuestion = (msg) ->
         msg.send answer.snippet + ' ' + answer.link
 
 module.exports = (robot) ->
-  if !process.env.HUBOT_FIVE_W_HEAR?
+
     robot.respond /who .+/i, (msg) ->
       googleQuestion msg
 
