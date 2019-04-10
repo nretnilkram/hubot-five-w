@@ -13,6 +13,8 @@
 #   hubot how <> - Googles and return content for question
 #
 # Configuration:
+#   HUBOT_GOOGLE_CSE_ID - Google API ID
+#   HUBOT_GOOGLE_CSE_KEY - Google API Key
 #   HUBOT_FIVE_W_HEAR - Optional. If set, bot will respond to the above command without needing to address hubot first.
 #
 # Author:
@@ -44,7 +46,7 @@ googleQuestion = (msg) ->
         msg.send answer.snippet + ' ' + answer.link
 
 module.exports = (robot) ->
-  if !process.env.HUBOT_CHANCE_HEAR?
+  if !process.env.HUBOT_FIVE_W_HEAR?
     robot.respond /who .+/i, (msg) ->
       googleQuestion msg
 
@@ -64,7 +66,7 @@ module.exports = (robot) ->
       googleQuestion msg
 
 # feature, not added to docs since you can't conditionally document commands
-  if process.env.HUBOT_CHANCE_HEAR?
+  if process.env.HUBOT_FIVE_W_HEAR?
     robot.hear /^who .+/i, (msg) ->
       googleQuestion msg
 
