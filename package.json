@@ -1,7 +1,7 @@
 {
   "name": "hubot-five-w",
   "description": "A hubot script that responds based on chance",
-  "version": "19.4.9",
+  "version": "19.4.9a",
   "author": "Nretnil Kram <signkram@gmail.com>",
   "license": "MIT",
   "keywords": [

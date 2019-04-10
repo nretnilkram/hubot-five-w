@@ -15,6 +15,7 @@
 # Configuration:
 #   HUBOT_GOOGLE_CSE_ID - Google API ID
 #   HUBOT_GOOGLE_CSE_KEY - Google API Key
+#   HUBOT_GOOGLE_SAFE_SEARCH - Optional.  Set google safe search level.  Defaults to 'High'.
 #   HUBOT_FIVE_W_HEAR - Optional. If set, bot will respond to the above command without needing to address hubot first.
 #
 # Author:
