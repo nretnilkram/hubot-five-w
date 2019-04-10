@@ -48,10 +48,10 @@ googleQuestion = (msg) ->
 
 module.exports = (robot) ->
 
-  robot.respond /(who|what|when|where|why|how) .+/i, (msg) ->
-    googleQuestion msg
-
-  # Optional feature, not added to docs since you can't conditionally document commands
-  if process.env.HUBOT_FIVE_W_HEAR?
+  hear = process.env.HUBOT_FIVE_W_HEAR
+  if hear
     robot.hear /^(who|what|when|where|why|how) .+/i, (msg) ->
+      googleQuestion msg
+  else
+    robot.respond /(who|what|when|where|why|how) .+/i, (msg) ->
       googleQuestion msg
