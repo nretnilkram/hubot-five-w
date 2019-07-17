@@ -51,6 +51,6 @@ module.exports = (robot) ->
     robot.respond /(who|what|when|where|why|how) .+/i, (msg) ->
       googleQuestion msg
 
-    if process.env.HUBOT_FIVE_W_HEAR = "true"
+    if process.env.HUBOT_FIVE_W_HEAR == "true"
       robot.hear /^(who|what|when|where|why|how) .+/i, (msg) ->
         googleQuestion msg
