@@ -47,6 +47,9 @@ const googleQuestion = (msg) => {
         const answer = msg.random(response.items);
         msg.send(answer.snippet + ' ' + answer.link);
       });
+  } else {
+    msg.robot.logger.error("Missing environment variable HUBOT_GOOGLE_CSE_ID");
+    msg.send("Missing server environment variable HUBOT_GOOGLE_CSE_ID.");
   }
 };
 
