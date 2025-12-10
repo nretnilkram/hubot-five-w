@@ -45,7 +45,8 @@ const googleQuestion = (msg) => {
       .get()((err, res, body) => {
         const response = JSON.parse(body);
         if (!response.items || response.items.length === 0) {
-          msg.robot.logger.error("No search results found:", response);
+          msg.robot.logger.error("No search results found: ", response);
+          msg.robot.logger.error("HTTP body: ", body)
           msg.send("Sorry, I couldn't find any results for that question.");
           return;
         }
