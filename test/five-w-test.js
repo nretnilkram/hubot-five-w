@@ -1,16 +1,18 @@
-const chai = require('chai');
-const sinon = require('sinon');
-chai.use(require('sinon-chai'));
+import * as chai from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 
-const expect = chai.expect;
+chai.use(sinonChai);
+const { expect } = chai;
 
 describe('hubot-five-w', () => {
-  beforeEach(function() {
+  beforeEach(async function() {
     this.robot = {
       respond: sinon.spy(),
       hear: sinon.spy()
     };
-    require('../src/five-w')(this.robot);
+    const { default: fiveW } = await import('../src/five-w.js');
+    fiveW(this.robot);
   });
 
   it('responds to "who *"', function() {

@@ -50,7 +50,7 @@ const googleQuestion = (msg) => {
   }
 };
 
-module.exports = (robot) => {
+export default (robot) => {
   robot.respond(/(who|what|when|where|why|how) .+/i, (msg) => {
     googleQuestion(msg);
   });

@@ -18,13 +18,14 @@
   "dependencies": {},
   "devDependencies": {
     "hubot": "^13.1.4",
-    "chai": "^4.2.0",
+    "chai": "^6.2.1",
     "matchdep": "~2.0.0",
-    "mocha": "^6.1.4",
-    "sinon": "^7.3.2",
-    "sinon-chai": "^3.3.0"
+    "mocha": "^11.7.5",
+    "sinon": "^21.0.0",
+    "sinon-chai": "^4.0.1"
   },
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "script/test || true"
   }
