@@ -32,8 +32,13 @@ const googleQuestion = (msg) => {
       msg.send("Missing server environment variable HUBOT_GOOGLE_CSE_KEY.");
       return;
     }
+    // Extract the question part after the command word (who/what/when/where/why/how)
+    const questionWord = msg.match[1]; // The command word (who, what, etc.)
+    const questionText = msg.match[2]; // The actual question text
+    const searchQuery = `${questionWord} ${questionText}`;
+    
     const q = {
-      q: msg.match.input,
+      q: searchQuery,
       safe: process.env.HUBOT_GOOGLE_SAFE_SEARCH || 'high',
       fields: 'items(snippet,link)',
       cx: googleCseId,
@@ -86,12 +91,12 @@ const googleQuestion = (msg) => {
 };
 
 export default (robot) => {
-  robot.respond(/(who|what|when|where|why|how) .+/i, (msg) => {
+  robot.respond(/(who|what|when|where|why|how) (.+)/i, (msg) => {
     googleQuestion(msg);
   });
 
   if (process.env.HUBOT_FIVE_W_HEAR === "true") {
-    robot.hear(/^(who|what|when|where|why|how) .+/i, (msg) => {
+    robot.hear(/^(who|what|when|where|why|how) (.+)/i, (msg) => {
       googleQuestion(msg);
     });
   }
