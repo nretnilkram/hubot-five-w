@@ -43,13 +43,39 @@ const googleQuestion = (msg) => {
     msg.http(url)
       .query(q)
       .get()((err, res, body) => {
-        const response = JSON.parse(body);
+        if (err) {
+          msg.robot.logger.error("HTTP request error:", err);
+          msg.send("Sorry, there was an error connecting to Google search.");
+          return;
+        }
+        
+        if (res.statusCode !== 200) {
+          msg.robot.logger.error(`HTTP ${res.statusCode} error:`, body);
+          msg.send(`Sorry, Google search returned an error (${res.statusCode}).`);
+          return;
+        }
+
+        let response;
+        try {
+          response = JSON.parse(body);
+        } catch (parseErr) {
+          msg.robot.logger.error("Failed to parse JSON response:", parseErr, "Body:", body);
+          msg.send("Sorry, received an invalid response from Google search.");
+          return;
+        }
+
+        if (response.error) {
+          msg.robot.logger.error("Google API error:", response.error);
+          msg.send(`Sorry, Google API error: ${response.error.message || 'Unknown error'}`);
+          return;
+        }
+
         if (!response.items || response.items.length === 0) {
-          msg.robot.logger.error("No search results found: ", response);
-          msg.robot.logger.error("HTTP body: ", body)
+          msg.robot.logger.info("No search results found for query:", q.q);
           msg.send("Sorry, I couldn't find any results for that question.");
           return;
         }
+
         const answer = msg.random(response.items);
         msg.send(answer.snippet + ' ' + answer.link);
       });
