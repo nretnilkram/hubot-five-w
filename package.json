@@ -1,7 +1,7 @@
 {
   "name": "hubot-five-w",
   "description": "A hubot script that responds based on chance",
-  "version": "19.7.16",
+  "version": "25.12.10",
   "author": "Nretnil Kram <signkram@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -17,15 +17,14 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "coffeescript": "^2.4",
-    "hubot": "3.x",
+    "hubot": "^13.1.4",
     "chai": "^4.2.0",
     "matchdep": "~2.0.0",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0"
   },
-  "main": "index.coffee",
+  "main": "index.js",
   "scripts": {
     "test": "script/test || true"
   }
