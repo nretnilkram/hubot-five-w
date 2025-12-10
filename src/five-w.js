@@ -44,6 +44,11 @@ const googleQuestion = (msg) => {
       .query(q)
       .get()((err, res, body) => {
         const response = JSON.parse(body);
+        if (!response.items || response.items.length === 0) {
+          msg.robot.logger.error("No search results found:", response);
+          msg.send("Sorry, I couldn't find any results for that question.");
+          return;
+        }
         const answer = msg.random(response.items);
         msg.send(answer.snippet + ' ' + answer.link);
       });
